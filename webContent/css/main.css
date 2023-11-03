@@ -1,0 +1,71 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+*{
+	padding: 0;
+	margin: 0;
+	font-family: 'Carter One';
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+body{
+	background-color: #E3F1FA;
+}
+
+
+header{
+	display: flex;
+	align-items: center;
+	background-color: #3282B8;
+	width: 100%;
+	height: 50px;
+}
+header>img{
+	height: 80%;
+	margin-left: 10px;
+	margin-right: 5px;
+}
+header>span{
+	font-size: 25px;
+	color: white;
+}
+
+header>.sign{
+	position: absolute;
+	right: 0;
+}
+header>.sign>a>.signIn{
+	font-size: 17px;
+	color: white;
+	margin-right: 10px;
+}
+header>.sign>a>.signUp{
+	font-size: 17px;
+	color: white;
+	margin-right: 10px;
+}
+
+
+nav{
+	display: flex;
+	align-items: center;
+	background-color: #0F4C75;
+	width: 100%;
+	height: 40px;
+	box-shadow: 0 3px 10px gray;
+}
+
+nav>.search{
+	position: absolute;
+	right: 40px;
+}
+nav>.search>.text{
+	width: 250px;
+	margin-right: -4px;
+}
+nav>.search>.btn{
+	width: 50px;
+}
+
+
