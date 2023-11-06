@@ -1,5 +1,11 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+@font-face {
+    font-family: 'JalnanGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 *{
 	padding: 0;
 	margin: 0;
@@ -63,9 +69,77 @@ nav>.search{
 nav>.search>.text{
 	width: 250px;
 	margin-right: -4px;
+	overflow-x: hidden;
 }
 nav>.search>.btn{
 	width: 50px;
+}
+
+section{
+	
+}
+section>.main{
+	float: left;
+	width: 50%;
+	margin-top: 30px;
+	padding: 4% 5%;
+	border: 1px black solid;
+	border-radius: 30px;
+	background-color: rgb(214, 234, 248);
+}
+.i{
+	background-color: yellow;
+	width: 30vw;
+	height: 30vw;
+}
+
+section>.main>.signUp{
+	margin-top: 40px;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+}
+section>.main>.signUp>.title{
+	margin-bottom: 40px;
+	font-size: 30px;
+	font-family: 'JalnanGothic';
+}
+section>.main>.signUp>label{
+	font-family: 'JalnanGothic';
+}
+section>.main>.signUp>label>input{
+	font-family: 'JalnanGothic';
+	margin-top: 7px;
+	margin-bottom: 30px;
+	width: 340px;
+	height: 30px;
+	border-radius: 10px;
+	overflow-x: hidden;
+	padding-inline-end: 20px;
+    padding-inline-start: 20px;
+}
+section>.main>.signUp>.btn{
+	font-family: 'JalnanGothic';
+	margin-top: 7px;
+	margin-bottom: 30px;
+	width: 150px;
+	height: 30px;
+	border-radius: 10px;
+}
+
+section>.sideA{
+	display: flex;
+	width: 16%;
+	padding: 2%;
+	float: left;
+}
+
+section>.sideB{
+	display: flex;
+	width: 15%;
+	padding: 2%;
+	float: left;
 }
 
 
