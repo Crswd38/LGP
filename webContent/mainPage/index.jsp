@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="list.ListDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,17 +11,24 @@
 <%	
 	String signUp = request.getParameter("signUp");
 	String signIn = request.getParameter("signIn");
+	String addGame = request.getParameter("addGame");
+	Object sid = session.getAttribute("sid");
 %>
 </head>
 <body>
-
 	<header>
 		<img alt="title" src="../image/joistic.png">
 		<span>Light Game Player</span>
-		
 		<div class="sign">
-			<a href="index.jsp?signIn"><span class="signIn">sign in</span></a>
-			<a href="index.jsp?signUp"><span class="signUp">sign up</span></a>
+		<%if(sid==null){ %>
+			<a href="index.jsp?signIn"><span class="signIn">Sign In</span></a>
+			<a href="index.jsp?signUp"><span class="signUp">Sign Up</span></a>
+		<%}else if(sid.toString().equals("crswd38")){ %>
+			<a href="index.jsp?addGame"><span class="signIn">Add Game</span></a>
+			<a href="index.jsp" onclick="location.href='logout.jsp'"><span class="signUp">Sign Out</span></a>
+		<%}else{ %>
+			<a href="index.jsp" onclick="location.href='logout.jsp'"><span class="signUp">Sign Out</span></a>
+		<%} %>
 		</div>
 	</header>
 	
@@ -31,36 +40,68 @@
 	</nav>
 	
 	<section>
-		<div class="sideA"><span>1</span></div>
+		<div class="sideA"><span></span></div>
 		<div class="main">
-	<%if(signUp != null){ %>
-	
-			<form action="signUp.jsp" method="post" class="signUp">
-				<span class="title">회원가입</span>
-				<label>&nbsp;&nbsp;닉네임을 적어주세요.<br>
-				<input type="text" name="name" required></label>
-				<label>&nbsp;&nbsp;이메일을 적어주세요.<br>
-				<input type="email" name="email" required></label>
-				<label>&nbsp;&nbsp;비밀번호를 적어주세요.<br>
-				<input type="password" name="pw" required></label>
+		
+		<%if(signUp != null){ %>
+			<div class="center"><span class="title">회원가입</span></div>
+			<form action="signUpAction.jsp" method="post" class="signUp" enctype="multipart/form-data">
+				<div class="profile">
+					<input type="file" name="profile">
+				</div>
+				<div class="input">
+					<label>&nbsp;&nbsp;아이디를 적어주세요.<br>
+					<input type="text" name="id" required maxlength="20"></label>
+					<label>&nbsp;&nbsp;닉네임을 적어주세요.<br>
+					<input type="text" name="name" required maxlength="10"></label>
+					<label>&nbsp;&nbsp;비밀번호를 적어주세요.<br>
+					<input type="password" name="pw" required maxlength="100"></label>
+				</div>
 				<input type="submit" value="회원가입" class="btn">
 			</form>
 			
-	<%}else if(signIn != null){ %>
-	
-			<div class="signIn">
-				<div class="i"></div>
-			</div>
+		<%}else if(signIn != null){ %>
+			<div class="center"><span class="title">로그인</span></div>
+			<form action="signInAction.jsp" method="post" class="signIn">
+			<%if(signIn.equals("1")){ %>
+				<div class="center"><span class="wrongSignIn">아이디나 비밀번호가 맞지 않습니다.</span></div>
+			<%} %>
+				<label>&nbsp;&nbsp;아이디를 적어주세요.<br>
+				<input type="text" name="id" required></label>
+				<label>&nbsp;&nbsp;비밀번호를 적어주세요.<br>
+				<input type="password" name="pw" required></label>
+				<input type="submit" value="로그인" class="btn">
+			</form>
 			
-	<%}//else if(){ %>
-	
-		<!-- <div class="i"></div>
-		<a href="" class="addGameBtn"><span>게임 추가</span></a> -->
-	
-	<%//} %>
+		<%}else if(addGame != null){ %>
+			<form action="addGameAction.jsp" method="post" class="addGame" enctype="multipart/form-data">
+				<div class="gameImage">
+					<input type="file" name="gameImage">
+				</div>
+				<div class="input">
+					<input type="text" name="g_name" required maxlength="20" placeholder="이름">
+					<textarea rows="" cols="" name="explanation" placeholder="게임 설명" required></textarea>
+					<input type="text" name="url" required maxlength="100" placeholder="URL">
+					<input type="submit" value="게임추가" class="btn">
+				</div>
+			</form>
+		
+		<%}else{
+			ResultSet rs = new ListDAO().getList();
+		%>
+			<ul class="list">
+			<%while(rs.next()){ %>
+				<li>
+					<a href="<%=rs.getString(6)%>">
+						<img alt="gameImage" src="../gameImage/<%=rs.getString(7)%>">
+						<%=rs.getString(2)%>
+					</a>
+				</li>
+			<%} %>
+			</ul>
+		<%} %>
 		</div>
-		<div class="sideB"><span>1</span></div>
+		<div class="sideB"><span></span></div>
 	</section>
-	
 </body>
 </html>
