@@ -14,7 +14,8 @@
 		MultipartRequest multi = new MultipartRequest(request, uploadDir, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		ListDAO dao = new ListDAO();
 		ListDTO dto = new ListDTO();
-		dto.setImage(multi.getFilesystemName("gameImage"));
+		String gameImage = multi.getFilesystemName("gameImage");
+		dto.setImage(gameImage);
 		dto.setG_name(multi.getParameter("g_name"));
 		dto.setExplanation(multi.getParameter("explanation"));
 		dto.setUrl(multi.getParameter("url"));

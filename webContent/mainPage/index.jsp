@@ -12,6 +12,7 @@
 	String signUp = request.getParameter("signUp");
 	String signIn = request.getParameter("signIn");
 	String addGame = request.getParameter("addGame");
+	String idx = request.getParameter("idx");
 	Object sid = session.getAttribute("sid");
 %>
 </head>
@@ -86,13 +87,26 @@
 				</div>
 			</form>
 		
+		<%}else if(idx != null){
+			ResultSet rs = new ListDAO().getGameInfo(Integer.parseInt(idx));
+			rs.next();
+		%>
+			<div class="gameInfo">
+				<img alt="gameImage" src="../gameImage/<%=rs.getString(7)%>" class="gameImage">
+				<div class="input">
+					<span class="g_name"><%=rs.getString(2)%></span>
+					<span class="explanation"><%=rs.getString(3)%></span>
+					<a class="url" href="../<%=rs.getString(6)%>">게임 들어가기-></a>
+				</div>
+			</div>
+			 
 		<%}else{
 			ResultSet rs = new ListDAO().getList();
 		%>
 			<ul class="list">
 			<%while(rs.next()){ %>
 				<li>
-					<a href="<%=rs.getString(6)%>">
+					<a href="index.jsp?idx=<%=rs.getString(1)%>">
 						<img alt="gameImage" src="../gameImage/<%=rs.getString(7)%>">
 						<%=rs.getString(2)%>
 					</a>

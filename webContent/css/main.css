@@ -208,19 +208,44 @@ section>.main>.addGame>.input>textarea{
 	margin-bottom: 20px;
 }
 section>.main>.addGame>.input>.btn{
+	font-family: 'JalnanGothic';
 	width: 200px;
 	border-radius: 20px;
 	border: 1px solid grey;
 	height: 40px;
 }
-section>.main>.addGame>.btn{
-	font-family: 'JalnanGothic';
-	margin-top: 7px;
-	margin-bottom: 30px;
-	width: 150px;
-	height: 30px;
-	border-radius: 10px;
+
+section>.main>.gameInfo{
+	display: flex;
+	justify-content: space-around;
+	margin-left: -50px;
 }
+section>.main>.gameInfo>.gameImage{
+	width: 580px;
+	height: 600px;
+}
+section>.main>.gameInfo>.input{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+section>.main>.gameInfo>.input>span{
+	font-family: 'JalnanGothic';
+	width: 250px;
+	height: 40px;
+	margin-bottom: 20px;
+}
+section>.main>.gameInfo>.input>.explanation{
+	font-family: 'JalnanGothic';
+	width: 250px;
+	height: 400px;
+	margin-bottom: 20px;
+}
+section>.main>.gameInfo>.input>.url{
+	font-family: 'JalnanGothic';
+	margin-left: 200px;
+}
+
 section>.main>.list{
 	border-top: 0.5px darkgray solid;
 	border-bottom: 0.5px darkgray solid;

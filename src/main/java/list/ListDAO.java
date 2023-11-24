@@ -73,5 +73,17 @@ public class ListDAO  extends JDBConnect{
 		}
 		return rs;
 	}
+	
+	public ResultSet getGameInfo(int idx) {
+		String query = "SELECT * FROM list where idx=? order by idx desc";
+		try {
+			psmt = conn.prepareStatement(query);
+			psmt.setInt(1, idx);
+			rs = psmt.executeQuery();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
 }
 
