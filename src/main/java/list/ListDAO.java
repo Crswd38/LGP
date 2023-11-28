@@ -85,5 +85,17 @@ public class ListDAO  extends JDBConnect{
 		}
 		return rs;
 	}
+	
+	public ResultSet getSearchList(String name) {
+		String query = "SELECT * FROM list where g_name like ? order by idx desc";
+		try {
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, "%" + name + "%");
+			rs = psmt.executeQuery();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
 }
 

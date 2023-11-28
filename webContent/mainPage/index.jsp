@@ -13,13 +13,14 @@
 	String signIn = request.getParameter("signIn");
 	String addGame = request.getParameter("addGame");
 	String idx = request.getParameter("idx");
+	String search = request.getParameter("search");
 	Object sid = session.getAttribute("sid");
 %>
 </head>
 <body>
 	<header>
 		<img alt="title" src="../image/joistic.png">
-		<span>Light Game Player</span>
+		<a href="index.jsp">Light Game Player</a>
 		<div class="sign">
 		<%if(sid==null){ %>
 			<a href="index.jsp?signIn"><span class="signIn">Sign In</span></a>
@@ -41,7 +42,7 @@
 	</nav>
 	
 	<section>
-		<div class="sideA"><span></span></div>
+		<div class="sideA"><img alt="상미로고" src="../image/logoBlue.png"></div>
 		<div class="main">
 		
 		<%if(signUp != null){ %>
@@ -96,11 +97,29 @@
 				<div class="input">
 					<span class="g_name"><%=rs.getString(2)%></span>
 					<span class="explanation"><%=rs.getString(3)%></span>
-					<a class="url" href="../<%=rs.getString(6)%>">게임 들어가기-></a>
+					<a class="url" href="../game/<%=rs.getString(6)%>">게임 들어가기-></a>
 				</div>
 			</div>
-			 
-		<%}else{
+			
+		<%}else if(search != null){
+			ResultSet rs = new ListDAO().getSearchList(search);
+			if(rs != null){%>
+				<ul class="searchList">
+				<%
+				rs = new ListDAO().getSearchList(search);
+				while(rs.next()){ %>
+					<li>
+						<a href="index.jsp?idx=<%=rs.getString(1)%>">
+							<img alt="gameImage" src="../gameImage/<%=rs.getString(7)%>">
+							<%=rs.getString(2)%>
+						</a>
+					</li>
+				<%} %>
+				</ul>
+		<%	}else{%>
+			<span>not found</span>
+		<%	}
+		}else{
 			ResultSet rs = new ListDAO().getList();
 		%>
 			<ul class="list">
@@ -115,7 +134,7 @@
 			</ul>
 		<%} %>
 		</div>
-		<div class="sideB"><span></span></div>
+		<div class="sideB"><img alt="상미로고" src="../image/logoBlue.png"></div>
 	</section>
 </body>
 </html>
