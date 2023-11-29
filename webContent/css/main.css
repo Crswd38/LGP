@@ -273,19 +273,19 @@ section>.main>.list>li>a>img{
 }
 
 section>.main>.searchList>li{
-	height: 100px;
+	height: 90px;
 	background-color: #C8E1F2;
 	margin-bottom: 10px;
 }
 section>.main>.searchList>li>a{
 	font-family: 'JalnanGothic';
-	height: 100px;
+	height: 90px;
 	display: flex;
 	align-items: center;
 	font-size: 20px;
 }
 section>.main>.searchList>li>a>img{
-	height: 100px;
+	height: 90px;
 	margin-right: 20px;
 }
 
