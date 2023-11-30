@@ -14,6 +14,8 @@
 	String addGame = request.getParameter("addGame");
 	String idx = request.getParameter("idx");
 	String search = request.getParameter("search");
+	String populer = request.getParameter("populer");
+	String newer = request.getParameter("newer");
 	Object sid = session.getAttribute("sid");
 %>
 </head>
@@ -35,6 +37,8 @@
 	</header>
 	
 	<nav>
+		<a href="index.jsp?populer" class="populer">Populer</a>
+		<a href="index.jsp?newer" class="new">New</a>
 		<form action="index.jsp" method="get" class="search">
 			<input type="text" name="search" class="text">
 			<input type="submit" value="search" class="btn">
@@ -89,7 +93,9 @@
 			</form>
 		
 		<%}else if(idx != null){
-			ResultSet rs = new ListDAO().getGameInfo(Integer.parseInt(idx));
+			ListDAO dao = new ListDAO();
+			dao.visitCount(idx);
+			ResultSet rs = dao.getGameInfo(idx);
 			rs.next();
 		%>
 			<div class="gameInfo">
@@ -119,7 +125,36 @@
 		<%	}else{%>
 			<span>not found</span>
 		<%	}
-		}else{
+			   
+		}else if(populer != null){
+			ResultSet rs = new ListDAO().getPopulerList();
+		%>
+			<ul class="list">
+			<%while(rs.next()){ %>
+				<li>
+					<a href="index.jsp?idx=<%=rs.getString(1)%>">
+						<img alt="gameImage" src="../gameImage/<%=rs.getString(7)%>">
+						<%=rs.getString(2)%>
+					</a>
+				</li>
+			<%} %>
+			</ul>
+			
+		<%}else if(newer != null){
+			ResultSet rs = new ListDAO().getNewerList();
+		%>
+			<ul class="list">
+			<%while(rs.next()){ %>
+				<li>
+					<a href="index.jsp?idx=<%=rs.getString(1)%>">
+						<img alt="gameImage" src="../gameImage/<%=rs.getString(7)%>">
+						<%=rs.getString(2)%>
+					</a>
+				</li>
+			<%} %>
+			</ul>
+			
+		<%}else{
 			ResultSet rs = new ListDAO().getList();
 		%>
 			<ul class="list">

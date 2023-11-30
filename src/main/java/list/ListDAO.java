@@ -64,7 +64,7 @@ public class ListDAO  extends JDBConnect{
 	}
 	
 	public ResultSet getList() {
-		String query = "SELECT * FROM list order by idx desc";
+		String query = "select * from list order by idx desc";
 		try {
 			psmt = conn.prepareStatement(query);
 			rs = psmt.executeQuery();
@@ -74,11 +74,11 @@ public class ListDAO  extends JDBConnect{
 		return rs;
 	}
 	
-	public ResultSet getGameInfo(int idx) {
-		String query = "SELECT * FROM list where idx=? order by idx desc";
+	public ResultSet getGameInfo(String idx) {
+		String query = "select * from list where idx=? order by idx desc";
 		try {
 			psmt = conn.prepareStatement(query);
-			psmt.setInt(1, idx);
+			psmt.setString(1, idx);
 			rs = psmt.executeQuery();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -87,7 +87,7 @@ public class ListDAO  extends JDBConnect{
 	}
 	
 	public ResultSet getSearchList(String name) {
-		String query = "SELECT * FROM list where g_name like ? order by idx desc";
+		String query = "select * from list where g_name like ? order by idx desc";
 		try {
 			psmt = conn.prepareStatement(query);
 			psmt.setString(1, "%" + name + "%");
@@ -96,6 +96,39 @@ public class ListDAO  extends JDBConnect{
 			e.printStackTrace();
 		}
 		return rs;
+	}
+	
+	public ResultSet getPopulerList() {
+		String query = "select * from list order by visit desc";
+		try {
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public ResultSet getNewerList() {
+		String query = "select * from list order by madeDate desc";
+		try {
+			psmt = conn.prepareStatement(query);
+			rs = psmt.executeQuery();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public void visitCount(String idx) {
+		String query = "update list set visit = visit + 1 where idx = ?";
+		try {
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, idx);
+			psmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 

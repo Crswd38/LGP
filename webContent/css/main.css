@@ -71,6 +71,16 @@ nav{
 	box-shadow: 0 3px 10px gray;
 }
 
+nav>.populer{
+	position: absolute;
+	left: 22%;
+}
+
+nav>.new{
+	position: absolute;
+	left: 30%;
+}
+
 nav>.search{
 	position: absolute;
 	right: 22%;
